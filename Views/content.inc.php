@@ -7,8 +7,8 @@ if ((isset($user)) && ($user['user_id'])) {
                 require_once($path."/../Components/DoctorRequest/index.inc.php");
                 break;
 
-            case 'Account':
-                require_once($path."/../Components/Account/index.inc.php");
+            case 'Accounts':
+                require_once($path."/../Components/Accounts/index.inc.php");
                 break;
 
             case 'Estimate':

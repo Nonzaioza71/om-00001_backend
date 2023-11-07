@@ -3,7 +3,7 @@
 <head>
     <?php require_once('./Views/header.inc.php') ?>
 </head>
-<body>
+<body class="overflow-hidden">
     <?php require_once('./Views/body.inc.php') ?>
 </body>
 </html>

@@ -14,4 +14,4 @@
     $res = boolval($task[1] && $task[2]);
 
     // echo json_encode($data['data']);
-    echo json_encode($task[2]);
+    echo json_encode($res);

@@ -1,16 +1,10 @@
-<nav class="navbar fixed-top bg-light col-12">
+<nav class="navbar fixed-top bg-light col-12 border-bottom" id="TheNavbar">
     <div class="container justify-content-center">
-        <button class="btn btn-lg btn-outline-success fs-1 text-dark ps-4 pe-4" onClick="toggleLaunchpad(true)">
-            <img class="icon-lg" src="Templates\assets\imgs\list.png">
-            เมนู
-        </button>
+        <h4 class="w-100 text-start">Admin's Menu</h4>
     </div>
 </nav>
-<nav class="navbar bg-light col-12">
+<nav class="navbar bg-light col-12 border-bottom">
     <div class="container justify-content-center">
-        <button class="btn btn-lg btn-outline-success fs-1 text-dark ps-4 pe-4" onClick="toggleLaunchpad(true)">
-            <img class="icon-lg" src="Templates\assets\imgs\list.png">
-            เมนู
-        </button>
+        <h4 class="w-100 text-start">Admin's Menu</h4>
     </div>
 </nav>

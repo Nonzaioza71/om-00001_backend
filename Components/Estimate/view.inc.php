@@ -2,7 +2,7 @@
     <div class="col-12 d-flex justify-content-center">
         <div class="col-10">
             <div class="row">
-                <h1>การประเมิน</h1>
+                <h1>ตั้งค่าแบบประเมิน</h1>
             </div>
             <hr>
         </div>
@@ -22,14 +22,16 @@
                         </tr>
                     </table>
                     <table class="table" id="estimate_list">
-                        <tr>
-                            <td>
-                                <input class="form-control form-control-lg" type="text" id="estimate_list_item">
-                            </td>
-                            <td>
-                                <button class="btn btn-lg btn-danger w-100" onClick="removeRow(this)">ลบ</button>
-                            </td>
-                        </tr>
+                        <?php for ($i = 0; $i < count($estimate_list); $i++) { ?>
+                            <tr>
+                                <td>
+                                    <input class="form-control form-control-lg" type="text" id="estimate_list_item" value="<?php echo $estimate_list[$i]['estimate_title']?>">
+                                </td>
+                                <td>
+                                    <button class="btn btn-lg btn-danger w-100" onClick="removeRow(this)">ลบ</button>
+                                </td>
+                            </tr>
+                        <?php } ?>
                     </table>
                     <table class="table">
                         <tr>
@@ -55,7 +57,7 @@
         const newEle = document.createElement('tr')
         newEle.innerHTML = `
             <td>
-                <input class="form-control form-control-lg bg-success-50" type="text" id="estimate_list_item">
+                <input class="form-control form-control-lg bg-success-50" type="text" id="estimate_list_item" placeholder="NEW ITEM">
             </td>
             <td>
                 <button class="btn btn-lg btn-danger w-100 bg-danger" onClick="removeRow(this)">ลบ</button>
@@ -73,32 +75,37 @@
     function _handleSubmit() {
         const eles = document.querySelectorAll('#estimate_list_item')
         let data = []
-        eles.forEach(item=>{
+        eles.forEach(item => {
             data.push({
                 estimate_title: item.value
             })
         })
         fetch('./Controllers/updateEstimate.php', {
-            header: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            method: "POST",
-            body: JSON.stringify({
-                data
+                header: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                method: "POST",
+                body: JSON.stringify({
+                    data
+                })
             })
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            const _r = { isSuccess: true, refresh: true }
-            toggleDoctorRequestModal(_r)
-        })
-        .catch(e=>{
-            const _r = { isSuccess: false, refresh: true }
-            toggleDoctorRequestModal(_r)
-        })
+            .then(res => res.json())
+            .then(data => {
+                const _r = {
+                    isSuccess: true,
+                    refresh: true
+                }
+                toggleDoctorRequestModal(_r)
+            })
+            .catch(e => {
+                const _r = {
+                    isSuccess: false,
+                    refresh: true
+                }
+                toggleDoctorRequestModal(_r)
+            })
     }
-
 </script>
 
-<?php require_once(__DIR__.'/modal.inc.php'); ?>
+<?php require_once(__DIR__ . '/modal.inc.php'); ?>
