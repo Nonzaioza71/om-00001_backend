@@ -1,31 +1,57 @@
-<div class="card col-12 h-100vh fixed-top d-none" id="doctorRequestModal">
-    <div class="card-body position-absolute w-100 bottom-50 justify-content-center">
+<div class="card col-12 h-100vh fixed-top d-none" id="theModal">
+    <div class="card-body position-absolute w-100 top-25 justify-content-center">
         <div class="text-center">
-            <img id="icon" src="Templates\assets\imgs\checked.png" alt="" srcset="" style="width:128px; height:128px;" class="mb-5">
-            <h1 id="msg">ดำเนินการเสร็จสิ้น</h1>
-            <button class="btn btn-lg btn-success" onclick="toggleDoctorRequestModal(false)">
-                <h1>รับทราบ</h1>
-            </button>
+            <h2>การแก้ไขบัญชี <span id="user_name"></span></h2>
+            <h4 class="text-secondary">เพื่อความเป็นส่วนตัวและความปลอดภัยของผู้ใช้งาน สามารถเปลี่ยนข้อมูลได้เฉพาะบางส่วนเท่านั้น</h4>
+        </div>
+        <div class="col-12">
+            <div class="container">
+                <hr>
+                <div class="btn-group align-items-center col-12 gap-1">
+                    <button class="btn btn-warning" id="btn_clear_pin">ล้าง PIN</button>
+                    <button class="btn btn-danger" id="btn_ban_user">ระงับการใช้งาน</button>
+                    <button class="btn btn-danger" id="btn_remove_user">ลบออกจากระบบ</button>
+                </div>
+                <button class="btn btn-success w-100 mt-3" onclick="_toggleUserUpdateModal(false)">เสร็จสิ้น</button>
+            </div>
         </div>
     </div>
 </div>
-
 <script>
-    function toggleDoctorRequestModal(show) {
-        const modal = document.querySelector('#doctorRequestModal')
-        show ? modal.classList.remove('d-none') : modal.classList.add('d-none')
-        if (show) {
-            const icon = document.querySelector('#icon')
-            const msg = document.querySelector('#msg')
-            if (show.isSuccess) {
-                icon.setAttribute('src', 'Templates\\assets\\imgs\\checked.png')
-                msg.innerHTML = 'ดำเนินการเสร็จสิ้น'
-            } else {
-                icon.setAttribute('src', 'Templates\\assets\\imgs\\close.png')
-                msg.innerHTML = 'เกิดข้อผิดพลาดกรุณาลองใหม่ภายหลัง'
-            }
+    function _toggleUserUpdateModal(show) {
+        const modal = document.querySelector('#theModal')
+        show
+        ? modal.classList.remove('d-none')
+        : modal.classList.add('d-none')
+    }
+    function _handleUpdateUser(user_name, user_id, user_banned) {
+        const text_user_name = document.querySelector('#user_name')
+        const btn_clear_pin = document.querySelector('#btn_clear_pin')
+        const btn_ban_user = document.querySelector('#btn_ban_user')
+        const btn_remove_user = document.querySelector('#btn_remove_user')
+
+        text_user_name.innerHTML = user_name
+        btn_clear_pin.setAttribute('onClick', `
+            console.log(${user_id})
+        `)
+
+        btn_ban_user.setAttribute('onClick', `
+            _handleBanUser(${user_id}, ${user_banned})
+        `)
+        if(Boolean(user_banned)){
+            btn_ban_user.innerHTML = "ปลดการระงับใช้งาน"
+            btn_ban_user.classList.add('btn-success') 
+            btn_ban_user.classList.remove('btn-danger') 
         }else{
-            window.location.reload()
+            btn_ban_user.innerHTML = "ระงับการใช้งาน"
+            btn_ban_user.classList.remove('btn-success') 
+            btn_ban_user.classList.add('btn-danger') 
         }
+
+        btn_remove_user.setAttribute('onClick', `
+            _handleDeleteUser(${user_id})
+        `)
+        
+        _toggleUserUpdateModal(true)
     }
 </script>

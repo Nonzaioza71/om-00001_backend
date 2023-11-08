@@ -20,3 +20,9 @@
 .cursor-pointer{
     cursor: pointer;
 }
+.top-25{
+    top: 25%;
+}
+.bottom-25{
+    bottom: 25%;
+}

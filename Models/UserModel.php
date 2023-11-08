@@ -33,7 +33,9 @@
         }
 
         public function getUsersBy() {
-            $sql = "SELECT * FROM tb_users WHERE TRUE";
+            $sql = "SELECT tb_users.*, COALESCE(tb_user_banned_list.user_id, false) AS user_banned FROM tb_users 
+            LEFT JOIN tb_user_banned_list ON tb_user_banned_list.user_id = tb_users.user_id
+            WHERE TRUE;";
             $res = $this->connection->query($sql);
             $data = [];
             if($res->num_rows > 0){
@@ -110,5 +112,21 @@
             $this->connection->query($sql);
             return $this->getUserByCard($user_national_card);
         }
+        
+        public function deleteUserByID($user_id) {
+            $sql = "DELETE FROM tb_users WHERE `tb_users`.`user_id` = $user_id";
+            return $this->connection->query($sql);
+        }
+
+        public function insertBannedUserByID($user_id) {
+            $sql = "INSERT INTO `tb_user_banned_list` (`id`, `user_id`) VALUES (NULL, '$user_id')";
+            return $this->connection->query($sql);
+        }
+
+        public function deleteBannedUserByID($user_id) {
+            $sql = "DELETE FROM tb_user_banned_list WHERE `tb_user_banned_list`.`user_id` = $user_id";
+            return $this->connection->query($sql);
+        }
+
     }
     

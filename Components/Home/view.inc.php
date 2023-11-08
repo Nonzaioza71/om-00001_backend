@@ -40,7 +40,7 @@
                         <tr>
                             <td> <?php echo $i+1 ?> </td>
                             <td> <?php echo $estimate_list[$i]['estimate_title'] ?> </td>
-                            <td> <?php echo $estimate_list[$i]['score'] ?> </td>
+                            <td> <?php echo $estimate_list[$i]['raw_score'] / count($users_estimated_list) ?> </td>
                         </tr>
                     <?php }?>
                 </table>

@@ -13,6 +13,7 @@
     $users_count = count($users);
 
     $estimate_list = $estimate_model->getAVGEstimateBy();
+    $users_estimated_list = $estimate_model->getUserAVGEstimatedBy();
 
 
     require_once($path."/view.inc.php");
