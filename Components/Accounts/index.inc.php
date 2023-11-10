@@ -9,6 +9,12 @@
 
     $users_list = $user_model->getUsersBy();
 
+    $role_list = [];
+    $role_list[0]['text'] = "ผู้ใช้งาน";
+    $role_list[0]['value'] = "user";
+    $role_list[1]['text'] = "หมอ";
+    $role_list[1]['value'] = "doctor";
+
     $path = __DIR__;
     if (array_key_exists('view', $_GET)) {
         switch ($_GET['view']) {

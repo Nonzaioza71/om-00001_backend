@@ -11,6 +11,10 @@ if ((isset($user)) && ($user['user_id'])) {
                 require_once($path."/../Components/Accounts/index.inc.php");
                 break;
 
+            case 'BoardManager':
+                require_once($path."/../Components/BoardManager/index.inc.php");
+                break;
+
             case 'Estimate':
                 require_once($path."/../Components/Estimate/index.inc.php");
                 break;
@@ -27,18 +31,6 @@ if ((isset($user)) && ($user['user_id'])) {
         require_once($path."/../Components\Home\index.inc.php");
     }
 }else{
-    if (array_key_exists('app', $_GET)) {
-        switch ($_GET['app']) {
-            case 'signUp':
-                require_once($path."/../Components\signUp\index.inc.php");
-                break;
-            
-            default:
-                require_once($path."/../Components\signIn\index.inc.php");
-                break;
-        }
-    } else {
-        require_once($path."/../Components\signIn\index.inc.php");
-    }
+    require_once($path."/../Components\signIn\index.inc.php");
 }
     

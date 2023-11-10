@@ -2,7 +2,7 @@
 $menuList = [];
 $menuList['logined'] = [];
 $menuList['logined'][] = array('src' => "Templates\assets\imgs\house.png", 'name' => "หน้าหลัก", 'route' => '?');
-$menuList['logined'][] = array('src' => "Templates\assets\imgs\corkboard.png", 'name' => "ตั้งค่าการประชาสัมพันธ์", 'route' => '?app=Board');
+$menuList['logined'][] = array('src' => "Templates\assets\imgs\corkboard.png", 'name' => "ตั้งค่าการประชาสัมพันธ์", 'route' => '?app=BoardManager');
 $menuList['logined'][] = array('src' => "Templates\assets\imgs\contract.png", 'name' => "ตั้งค่าแบบประเมิน", 'route' => '?app=Estimate');
 $menuList['logined'][] = array('src' => "Templates\assets\imgs\user.png", 'name' => "ตั้งค่าบัญชีผู้ใช้งาน", 'route' => '?app=Accounts');
 $menuList['logined'][] = array('src' => "Templates\assets\imgs\log-out.png", 'name' => "ออกจากระบบ", 'route' => '?app=Logout');

@@ -112,6 +112,16 @@
             $this->connection->query($sql);
             return $this->getUserByCard($user_national_card);
         }
+
+        public function updateRoleUserByID($user_id, $user_role) {
+            $sql = "
+                UPDATE `tb_users` SET 
+                `user_role` = '$user_role' 
+                WHERE `tb_users`.`user_id` = $user_id
+            ";
+            // return $sql;
+            return $this->connection->query($sql);
+        }
         
         public function deleteUserByID($user_id) {
             $sql = "DELETE FROM tb_users WHERE `tb_users`.`user_id` = $user_id";
