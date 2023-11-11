@@ -1,36 +1,39 @@
 <?php
-$path = __DIR__;
-if ((isset($user)) && ($user['user_id'])) {
     if (array_key_exists('app', $_GET)) {
         switch ($_GET['app']) {
-            case 'DoctorRequest':
-                require_once($path."/../Components/DoctorRequest/index.inc.php");
+            case 'logout':
+                require_once('Components/Logout/index.inc.php');
                 break;
-
-            case 'Accounts':
-                require_once($path."/../Components/Accounts/index.inc.php");
+            
+            case 'static_board':
+                require_once('Components/StaticBoard/index.inc.php');
                 break;
-
-            case 'BoardManager':
-                require_once($path."/../Components/BoardManager/index.inc.php");
+            
+            case 'static_estimate':
+                require_once('Components/StaticEstimate/index.inc.php');
                 break;
-
-            case 'Estimate':
-                require_once($path."/../Components/Estimate/index.inc.php");
+            
+            case 'static_user':
+                require_once('Components/StaticUser/index.inc.php');
                 break;
-
-            case 'Logout':
-                require_once($path."/../Components/signOut/index.inc.php");
+            
+            case 'manage_board':
+                require_once('Components/ManageBoard/index.inc.php');
+                break;
+            
+            case 'manage_estimate':
+                require_once('Components/ManageEstimate/index.inc.php');
+                break;
+            
+            case 'manage_user':
+                require_once('Components/ManageUser/index.inc.php');
                 break;
             
             default:
-                require_once($path."/../Components\Home\index.inc.php");
+                require_once('Components/Overview/index.inc.php');
                 break;
         }
     } else {
-        require_once($path."/../Components\Home\index.inc.php");
+        require_once('Components/Overview/index.inc.php');
     }
-}else{
-    require_once($path."/../Components\signIn\index.inc.php");
-}
     

@@ -41,7 +41,8 @@ class BoardModel extends BaseModel
         return $data[0];
     }
 
-    public function updateBoardByID($id, $board_title, $board_detail, $board_image) {
+    public function updateBoardByID($id, $board_title, $board_detail, $board_image)
+    {
         $sql = "UPDATE `tb_boards` SET 
             `board_title` = '$board_title', 
             `board_detail` = '$board_detail', 
@@ -53,7 +54,69 @@ class BoardModel extends BaseModel
         return $this->connection->query($sql);
     }
 
-    public function insertBoardBy($board_title, $board_detail, $board_image) {
+    public function getBoardCommentByID($id)
+    {
+        $sql = "SELECT * FROM tb_board_reply
+        LEFT JOIN tb_users ON tb_users.user_id = tb_board_reply.user_id  
+        WHERE board_id = $id";
+
+        $res = $this->connection->query($sql);
+        $data = [];
+        if ($res->num_rows > 0) {
+            while ($row = $res->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+        return $data;
+    }
+
+    public function getBoardCommentByAdminID($id)
+    {
+        $sql = "SELECT * FROM tb_board_reply
+        LEFT JOIN tb_admins ON tb_admins.user_id = tb_board_reply.admin_id
+        WHERE board_id = $id AND tb_admins.user_id > 0";
+
+        $res = $this->connection->query($sql);
+        $data = [];
+        if ($res->num_rows > 0) {
+            while ($row = $res->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+        return $data;
+    }
+
+    public function updateBoardViewByID($id, $board_view)
+    {
+        $sql = "UPDATE `tb_boards` SET 
+            `board_view` = $board_view 
+            WHERE `tb_boards`.`id` = $id
+        ";
+        // return $sql;
+        return $this->connection->query($sql);
+    }
+
+    public function insertReplyBoardByID($board_id, $user_id, $user_msg)
+    {
+        $sql = "INSERT INTO `tb_board_reply` (
+            `id`, 
+            `board_id`, 
+            `user_id`, 
+            `admin_id`, 
+            `user_msg`
+            ) VALUES (
+                NULL, 
+                '$board_id', 
+                0, 
+                '$user_id', 
+                '$user_msg')
+            ";
+        // return $sql;
+        return $this->connection->query($sql);
+    }
+
+    public function insertBoardBy($board_title, $board_detail, $board_image)
+    {
         $sql = "INSERT INTO `tb_boards` (
             `id`, 
             `board_title`, 
@@ -69,14 +132,14 @@ class BoardModel extends BaseModel
                 NOW(), 
                 NOW()
             )";
-            // return $sql;
-            return $this->connection->query($sql);
+        // return $sql;
+        return $this->connection->query($sql);
     }
 
-    public function deleteBoardByID($board_id) {
+    public function deleteBoardByID($board_id)
+    {
         $sql = "DELETE FROM `tb_boards` WHERE `tb_boards`.`id` = $board_id;";
-            // return $sql;
-            return $this->connection->query($sql);
+        // return $sql;
+        return $this->connection->query($sql);
     }
-
 }

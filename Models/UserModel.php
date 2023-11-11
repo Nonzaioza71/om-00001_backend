@@ -32,10 +32,13 @@
             return $data;
         }
 
-        public function getUsersBy() {
+        public function getUsersBy($keyword = "") {
+            $connection = ($keyword != "") 
+            ? " AND tb_users.user_prefix LIKE '%$keyword%' OR tb_users.user_name LIKE '%$keyword%' OR tb_users.user_lastname LIKE '%$keyword%'" 
+            : "";
             $sql = "SELECT tb_users.*, COALESCE(tb_user_banned_list.user_id, false) AS user_banned FROM tb_users 
             LEFT JOIN tb_user_banned_list ON tb_user_banned_list.user_id = tb_users.user_id
-            WHERE TRUE;";
+            WHERE TRUE".$connection;
             $res = $this->connection->query($sql);
             $data = [];
             if($res->num_rows > 0){
@@ -70,12 +73,13 @@
             return $data;
         }
 
-        public function updateUserByID($user_prefix, $user_name, $user_lastname, $user_national_card, $user_birthday, $user_id) {
+        public function updateUserByID($user_prefix, $user_name, $user_lastname, $user_gender, $user_national_card, $user_birthday, $user_id) {
             $sql = "
                 UPDATE `tb_users` SET 
                 `user_prefix` = '$user_prefix', 
                 `user_name` = '$user_name', 
                 `user_lastname` = '$user_lastname', 
+                `user_gender` = '$user_gender', 
                 `user_national_card` = '$user_national_card', 
                 `user_birthday` = '$user_birthday' 
                 WHERE `tb_users`.`user_id` = $user_id

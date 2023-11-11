@@ -23,6 +23,20 @@ class EstimateModel extends BaseModel
         return $data;
     }
 
+    public function getUsersEstimatedBy()
+    {
+        $sql = "SELECT * FROM `tb_estimate_score` WHERE TRUE GROUP BY user_id";
+
+        $res = $this->connection->query($sql);
+        $data = [];
+        if ($res->num_rows > 0) {
+            while ($row = $res->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+        return $data;
+    }
+
     public function insertEstimateBy($arr)
     {
 
